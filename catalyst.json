@@ -33,5 +33,9 @@
         "https://ksp-clwavvcr.onslate.in"
       ]
     }
+  },
+  "apig": {
+    "enabled": true,
+    "rules": "catalyst-user-rules.json"
   }
 }

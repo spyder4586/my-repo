@@ -7,16 +7,21 @@ import { config } from './common/config';
 import { logger, newRequestId } from './common/logger';
 import { ok } from './common/errors';
 
-export default async function health(_context: any, basicIO?: any) {
-  const requestId = newRequestId();
-  const cfg = config();
-  logger.info('health.check', { requestId, route: '/health' });
-  const resData = ok({ status: 'ok', env: cfg.env });
-  if (basicIO && typeof basicIO.write === 'function') {
-    basicIO.write(JSON.stringify(resData));
-    basicIO.close();
-  }
-  return resData;
-}
+module.exports = (_context: any, basicIO: any) => {
+  try {
+    const requestId = newRequestId();
+    const cfg = config();
+    logger.info('health.check', { requestId, route: '/health' });
+    const response = ok({ status: 'ok', env: cfg.env });
 
-module.exports = health;
+    if (basicIO && typeof basicIO.write === 'function') {
+      basicIO.write(JSON.stringify(response));
+      basicIO.close();
+    }
+  } catch (err: any) {
+    if (basicIO && typeof basicIO.write === 'function') {
+      basicIO.write(JSON.stringify({ success: false, error: err.message, stack: err.stack }));
+      basicIO.close();
+    }
+  }
+};

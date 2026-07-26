@@ -1,6 +1,6 @@
 {
     "main":  "index.js",
-    "name":  "ingest",
+    "name":  "events",
     "version":  "1.0.0",
     "dependencies":  {
                          "zod":  "^3.23.0",

@@ -1,5 +1,12 @@
 {
-  "name": "masters",
-  "version": "1.0.0",
-  "main": "index.js"
+    "main":  "index.js",
+    "name":  "masters",
+    "version":  "1.0.0",
+    "dependencies":  {
+                         "zod":  "^3.23.0",
+                         "zcatalyst-sdk-node":  "latest",
+                         "pino":  "^9.1.0",
+                         "csv-parse":  "^5.5.0",
+                         "date-fns":  "^3.6.0"
+                     }
 }

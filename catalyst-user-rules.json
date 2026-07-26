@@ -1,0 +1,114 @@
+[
+  {
+    "name": "health_rule",
+    "source_endpoint": "/health",
+    "method": "GET",
+    "target_type": "Function",
+    "target_name": "health",
+    "auth": "disable"
+  },
+  {
+    "name": "me_rule",
+    "source_endpoint": "/me",
+    "method": "GET",
+    "target_type": "Function",
+    "target_name": "auth_context",
+    "auth": "enable"
+  },
+  {
+    "name": "cases_rule",
+    "source_endpoint": "/cases/*",
+    "method": "ANY",
+    "target_type": "Function",
+    "target_name": "cases",
+    "auth": "enable"
+  },
+  {
+    "name": "masters_rule",
+    "source_endpoint": "/masters/*",
+    "method": "ANY",
+    "target_type": "Function",
+    "target_name": "masters",
+    "auth": "enable"
+  },
+  {
+    "name": "analytics_rule",
+    "source_endpoint": "/analytics/*",
+    "method": "ANY",
+    "target_type": "Function",
+    "target_name": "analytics",
+    "auth": "enable"
+  },
+  {
+    "name": "network_rule",
+    "source_endpoint": "/network/*",
+    "method": "ANY",
+    "target_type": "Function",
+    "target_name": "network",
+    "auth": "enable"
+  },
+  {
+    "name": "ai_rule",
+    "source_endpoint": "/ai/*",
+    "method": "ANY",
+    "target_type": "Function",
+    "target_name": "ai",
+    "auth": "enable"
+  },
+  {
+    "name": "alerts_rule",
+    "source_endpoint": "/alerts/*",
+    "method": "ANY",
+    "target_type": "Function",
+    "target_name": "alerts",
+    "auth": "enable"
+  },
+  {
+    "name": "reports_rule",
+    "source_endpoint": "/reports/*",
+    "method": "ANY",
+    "target_type": "Function",
+    "target_name": "reports",
+    "auth": "enable"
+  },
+  {
+    "name": "admin_rule",
+    "source_endpoint": "/admin/*",
+    "method": "ANY",
+    "target_type": "Function",
+    "target_name": "admin",
+    "auth": "enable"
+  },
+  {
+    "name": "ingest_rule",
+    "source_endpoint": "/ingest/*",
+    "method": "ANY",
+    "target_type": "Function",
+    "target_name": "ingest",
+    "auth": "enable"
+  },
+  {
+    "name": "entities_rule",
+    "source_endpoint": "/entities/*",
+    "method": "ANY",
+    "target_type": "Function",
+    "target_name": "entities",
+    "auth": "enable"
+  },
+  {
+    "name": "search_rule",
+    "source_endpoint": "/search/*",
+    "method": "ANY",
+    "target_type": "Function",
+    "target_name": "search",
+    "auth": "enable"
+  },
+  {
+    "name": "offenders_rule",
+    "source_endpoint": "/offenders/*",
+    "method": "ANY",
+    "target_type": "Function",
+    "target_name": "offenders",
+    "auth": "enable"
+  }
+]
