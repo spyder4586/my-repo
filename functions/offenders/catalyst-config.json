@@ -1,9 +1,14 @@
 {
-  "name": "offenders",
-  "type": "advancedio",
-  "category": "Advanced I/O",
-  "description": "Repeat offender tracking + MO + cross-case profile (Phase 1.5)",
-  "stack": "node20",
-  "main": "index.js",
-  "path": "index.js"
+    "name":  "offenders",
+    "type":  "advancedio",
+    "category":  "Advanced I/O",
+    "description":  "Repeat offender tracking + MO + cross-case profile (Phase 1.5)",
+    "stack":  "node20",
+    "main":  "index.js",
+    "path":  "index.js",
+    "deployment":  {
+                       "name":  "offenders",
+                       "stack":  "node20",
+                       "type":  "advancedio"
+                   }
 }

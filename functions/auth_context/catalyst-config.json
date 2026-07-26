@@ -1,10 +1,15 @@
 {
-  "name": "auth_context",
-  "type": "basicio",
-  "category": "Basic I/O",
-  "description": "Authenticated profile GET /api/v1/me",
-  "isReponseHeader": false,
-  "stack": "node20",
-  "main": "index.js",
-  "path": "index.js"
+    "name":  "auth_context",
+    "type":  "basicio",
+    "category":  "Basic I/O",
+    "description":  "Authenticated profile GET /api/v1/me",
+    "isReponseHeader":  false,
+    "stack":  "node20",
+    "main":  "index.js",
+    "path":  "index.js",
+    "deployment":  {
+                       "name":  "auth_context",
+                       "stack":  "node20",
+                       "type":  "basicio"
+                   }
 }

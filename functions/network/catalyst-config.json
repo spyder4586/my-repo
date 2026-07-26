@@ -1,9 +1,14 @@
 {
-  "name": "network",
-  "type": "advancedio",
-  "category": "Advanced I/O",
-  "description": "Link analysis graph (sub-phase 3B)",
-  "stack": "node20",
-  "main": "index.js",
-  "path": "index.js"
+    "name":  "network",
+    "type":  "advancedio",
+    "category":  "Advanced I/O",
+    "description":  "Link analysis graph (sub-phase 3B)",
+    "stack":  "node20",
+    "main":  "index.js",
+    "path":  "index.js",
+    "deployment":  {
+                       "name":  "network",
+                       "stack":  "node20",
+                       "type":  "advancedio"
+                   }
 }

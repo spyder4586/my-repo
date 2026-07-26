@@ -1,9 +1,14 @@
 {
-  "name": "masters",
-  "type": "advancedio",
-  "category": "Advanced I/O",
-  "description": "Master data lookups (sub-phase 1C)",
-  "stack": "node20",
-  "main": "index.js",
-  "path": "index.js"
+    "name":  "masters",
+    "type":  "advancedio",
+    "category":  "Advanced I/O",
+    "description":  "Master data lookups (sub-phase 1C)",
+    "stack":  "node20",
+    "main":  "index.js",
+    "path":  "index.js",
+    "deployment":  {
+                       "name":  "masters",
+                       "stack":  "node20",
+                       "type":  "advancedio"
+                   }
 }

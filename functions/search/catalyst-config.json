@@ -1,9 +1,14 @@
 {
-  "name": "search",
-  "type": "advancedio",
-  "category": "Advanced I/O",
-  "description": "Global search",
-  "stack": "node20",
-  "main": "index.js",
-  "path": "index.js"
+    "name":  "search",
+    "type":  "advancedio",
+    "category":  "Advanced I/O",
+    "description":  "Global search",
+    "stack":  "node20",
+    "main":  "index.js",
+    "path":  "index.js",
+    "deployment":  {
+                       "name":  "search",
+                       "stack":  "node20",
+                       "type":  "advancedio"
+                   }
 }

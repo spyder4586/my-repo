@@ -1,9 +1,14 @@
 {
-  "name": "admin",
-  "type": "advancedio",
-  "category": "Advanced I/O",
-  "description": "Admin users/jobs/import/audit (sub-phase 5C)",
-  "stack": "node20",
-  "main": "index.js",
-  "path": "index.js"
+    "name":  "admin",
+    "type":  "advancedio",
+    "category":  "Advanced I/O",
+    "description":  "Admin users/jobs/import/audit (sub-phase 5C)",
+    "stack":  "node20",
+    "main":  "index.js",
+    "path":  "index.js",
+    "deployment":  {
+                       "name":  "admin",
+                       "stack":  "node20",
+                       "type":  "advancedio"
+                   }
 }

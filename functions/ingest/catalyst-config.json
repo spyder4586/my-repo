@@ -1,9 +1,14 @@
 {
-  "name": "ingest",
-  "type": "advancedio",
-  "category": "Advanced I/O",
-  "description": "FIR import pipeline trigger (sub-phase 1E)",
-  "stack": "node20",
-  "main": "index.js",
-  "path": "index.js"
+    "name":  "ingest",
+    "type":  "advancedio",
+    "category":  "Advanced I/O",
+    "description":  "FIR import pipeline trigger (sub-phase 1E)",
+    "stack":  "node20",
+    "main":  "index.js",
+    "path":  "index.js",
+    "deployment":  {
+                       "name":  "ingest",
+                       "stack":  "node20",
+                       "type":  "advancedio"
+                   }
 }

@@ -1,9 +1,14 @@
 {
-  "name": "alerts",
-  "type": "advancedio",
-  "category": "Advanced I/O",
-  "description": "Alert list & ack (sub-phase 4D)",
-  "stack": "node20",
-  "main": "index.js",
-  "path": "index.js"
+    "name":  "alerts",
+    "type":  "advancedio",
+    "category":  "Advanced I/O",
+    "description":  "Alert list \u0026 ack (sub-phase 4D)",
+    "stack":  "node20",
+    "main":  "index.js",
+    "path":  "index.js",
+    "deployment":  {
+                       "name":  "alerts",
+                       "stack":  "node20",
+                       "type":  "advancedio"
+                   }
 }

@@ -1,9 +1,14 @@
 {
-  "name": "cases",
-  "type": "advancedio",
-  "category": "Advanced I/O",
-  "description": "Case search + Case 360° (sub-phase 1D)",
-  "stack": "node20",
-  "main": "index.js",
-  "path": "index.js"
+    "name":  "cases",
+    "type":  "advancedio",
+    "category":  "Advanced I/O",
+    "description":  "Case search + Case 360° (sub-phase 1D)",
+    "stack":  "node20",
+    "main":  "index.js",
+    "path":  "index.js",
+    "deployment":  {
+                       "name":  "cases",
+                       "stack":  "node20",
+                       "type":  "advancedio"
+                   }
 }

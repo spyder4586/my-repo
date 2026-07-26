@@ -1,9 +1,14 @@
 {
-  "name": "reports",
-  "type": "advancedio",
-  "category": "Advanced I/O",
-  "description": "SmartBrowz PDF reports (sub-phase 5B)",
-  "stack": "node20",
-  "main": "index.js",
-  "path": "index.js"
+    "name":  "reports",
+    "type":  "advancedio",
+    "category":  "Advanced I/O",
+    "description":  "SmartBrowz PDF reports (sub-phase 5B)",
+    "stack":  "node20",
+    "main":  "index.js",
+    "path":  "index.js",
+    "deployment":  {
+                       "name":  "reports",
+                       "stack":  "node20",
+                       "type":  "advancedio"
+                   }
 }

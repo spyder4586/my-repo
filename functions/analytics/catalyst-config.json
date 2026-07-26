@@ -1,9 +1,14 @@
 {
-  "name": "analytics",
-  "type": "advancedio",
-  "category": "Advanced I/O",
-  "description": "Analytics aggregates & trends (sub-phase 2B)",
-  "stack": "node20",
-  "main": "index.js",
-  "path": "index.js"
+    "name":  "analytics",
+    "type":  "advancedio",
+    "category":  "Advanced I/O",
+    "description":  "Analytics aggregates \u0026 trends (sub-phase 2B)",
+    "stack":  "node20",
+    "main":  "index.js",
+    "path":  "index.js",
+    "deployment":  {
+                       "name":  "analytics",
+                       "stack":  "node20",
+                       "type":  "advancedio"
+                   }
 }
