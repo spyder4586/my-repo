@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { AppShell } from '@/components/layout/app-shell';
 import { Button } from '@/components/ui/button';
@@ -87,7 +87,7 @@ const INVESTIGATORS: IOOverview[] = [
   { id: 'IO-205', name: 'Sub-Inspector Anand Patil', designation: 'PSI', station: 'Marathahalli PS', caseCount: 28, overdueCount: 7, workload: 'HIGH' },
 ];
 
-export default function DistrictPage() {
+function DistrictPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const queryDistrict = searchParams.get('district');
@@ -644,5 +644,13 @@ export default function DistrictPage() {
         )}
       </AnimatePresence>
     </AppShell>
+  );
+}
+
+export default function DistrictPage() {
+  return (
+    <Suspense fallback={<div className="flex h-screen items-center justify-center text-muted-foreground text-sm">Loading District Command...</div>}>
+      <DistrictPageInner />
+    </Suspense>
   );
 }

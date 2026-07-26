@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { AppShell } from '@/components/layout/app-shell';
 import { Button } from '@/components/ui/button';
@@ -48,7 +48,7 @@ const INCIDENT_PINS: IncidentPin[] = [
   { id: 'PIN-3', location: 'Prashanth Layout, Gate 2', beat: 'Beat #1', type: 'Night Patrol Alarm Trigger', time: '2 hours ago', severity: 'LOW', io: 'SI Venkatesh' },
 ];
 
-export default function StationPage() {
+function StationPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const queryStation = searchParams.get('station');
@@ -318,5 +318,13 @@ export default function StationPage() {
         )}
       </AnimatePresence>
     </AppShell>
+  );
+}
+
+export default function StationPage() {
+  return (
+    <Suspense fallback={<div className="flex h-screen items-center justify-center text-muted-foreground text-sm">Loading Station Ops...</div>}>
+      <StationPageInner />
+    </Suspense>
   );
 }
