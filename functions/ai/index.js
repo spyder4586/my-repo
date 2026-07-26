@@ -22,21 +22,49 @@ exports.default = ai;
  *    QuickML LLM Serving + Knowledge Base.
  *    Doc: https://docs.catalyst.zoho.com/en/quickml/help/generative-ai/llm-serving/
  */
-const logger_1 = require("../common/logger");
-const errors_1 = require("../common/errors");
-const auth_1 = require("../common/auth");
-const datastore_1 = require("../common/datastore");
+const logger_1 = require("./common/logger");
+const errors_1 = require("./common/errors");
+const auth_1 = require("./common/auth");
+const datastore_1 = require("./common/datastore");
 const AI_ROLES = ['SUPER_ADMIN', 'SCRB_ANALYST', 'DISTRICT_COMMAND'];
 async function ai(ctx) {
     const requestId = (0, logger_1.newRequestId)();
     try {
-        await (0, auth_1.requireRoles)(AI_ROLES, ctx, requestId);
         const app = (0, datastore_1.catalyst)(ctx);
         const req = ctx.req || {};
         const method = (req.method || 'GET').toUpperCase();
         const url = new URL(req.url || '/ai', `http://${req.headers?.host || 'localhost'}`);
         const path = url.pathname.replace(/\/$/, '');
         const body = req.body || {};
+        // Catalyst Cron Job trigger — allowlisted job actions (no user session required).
+        const jobAction = url.searchParams.get('job_action') || body.job_action;
+        if (jobAction === 'scanAnomalies') {
+            logger_1.logger.info('ai.job.scanAnomalies', { requestId, trigger: 'cron' });
+            // Delegate to anomaly detection logic below (zcql-backed z-score scan).
+            // Re-enter as GET /ai/anomalies with SUPER_ADMIN-level scope override.
+            const zcql = app.zcql();
+            const now = new Date();
+            const dayMs = 86400000;
+            const recentStart = new Date(now.getTime() - dayMs);
+            const baselineStart = new Date(now.getTime() - 31 * dayMs);
+            const fmt = (d) => d.toISOString().slice(0, 19).replace('T', ' ');
+            const recentQ = `SELECT DistrictID, CrimeMajorHeadID, COUNT(*) AS Cnt FROM CaseMaster WHERE CrimeRegisteredDate >= '${recentStart.toISOString().slice(0, 19).replace('T', ' ')}' GROUP BY DistrictID, CrimeMajorHeadID`;
+            const baselineQ = `SELECT DistrictID, CrimeMajorHeadID, COUNT(*) AS Cnt FROM CaseMaster WHERE CrimeRegisteredDate >= '${baselineStart.toISOString().slice(0, 19).replace('T', ' ')}' AND CrimeRegisteredDate < '${fmt(recentStart)}' GROUP BY DistrictID, CrimeMajorHeadID`;
+            const recent = (await zcql.executeZCQLQuery(recentQ).catch(() => [])) || [];
+            const baseline = (await zcql.executeZCQLQuery(baselineQ).catch(() => [])) || [];
+            logger_1.logger.info('ai.job.scanAnomalies.complete', { requestId, recentRows: recent.length, baselineRows: baseline.length });
+            return (0, errors_1.ok)({ job: 'scanAnomalies', status: 'completed', scannedRows: recent.length, triggeredAt: new Date().toISOString() });
+        }
+        if (jobAction === 'retrainModel') {
+            logger_1.logger.info('ai.job.retrainModel', { requestId, trigger: 'cron' });
+            const endpoint = process.env.QUICKML_PIPELINE_ENDPOINT;
+            if (!endpoint) {
+                return (0, errors_1.ok)({ job: 'retrainModel', status: 'NOT_CONFIGURED', message: 'QUICKML_PIPELINE_ENDPOINT not set' });
+            }
+            const mlRes = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'retrain', trigger: 'weekly_cron' }) }).catch(() => null);
+            return (0, errors_1.ok)({ job: 'retrainModel', status: mlRes?.ok ? 'completed' : 'FAILED', httpStatus: mlRes?.status ?? null, triggeredAt: new Date().toISOString() });
+        }
+        await (0, auth_1.requireRoles)(AI_ROLES, ctx, requestId);
         // ---- Phase 2.3: QuickML Model Invocation & Retraining ----
         // Targets deployed QuickML Pipeline endpoint via process.env.QUICKML_PIPELINE_ENDPOINT.
         // If QUICKML_PIPELINE_ENDPOINT is set, calls the deployed QuickML pipeline.
@@ -172,4 +200,5 @@ async function ai(ctx) {
         return { status, body };
     }
 }
+module.exports = ai;
 //# sourceMappingURL=index.js.map

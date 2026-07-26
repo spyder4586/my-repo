@@ -1,10 +1,10 @@
 /**
  * Ingest Function — FIR extract import (JSON -> validate -> upsert).
  */
-import { logger, newRequestId } from '../common/logger';
-import { ok, toResponse, ApiError } from '../common/errors';
-import { requireRoles } from '../common/auth';
-import { catalyst } from '../common/datastore';
+import { logger, newRequestId } from './common/logger';
+import { ok, toResponse, ApiError } from './common/errors';
+import { requireRoles } from './common/auth';
+import { catalyst } from './common/datastore';
 
 export default async function ingest(ctx: any) {
   const requestId = newRequestId();
@@ -64,3 +64,5 @@ export default async function ingest(ctx: any) {
     return { status, body };
   }
 }
+
+module.exports = ingest;

@@ -4,7 +4,7 @@
  * Kicks off the fir_import Circuit (validate -> load -> graph refresh -> notify).
  * Reference: CATALYST_INTEGRATION.md #8/#9, IMPLEMENTATION2.md 1E.
  */
-import { logger, newRequestId } from '../../common/logger';
+import { logger, newRequestId } from '.././common/logger';
 
 export default async function onImportComplete(_ctx: unknown) {
   const requestId = newRequestId();

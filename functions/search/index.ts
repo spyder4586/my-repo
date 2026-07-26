@@ -1,7 +1,7 @@
-import { logger, newRequestId } from '../common/logger';
-import { ok, toResponse, ApiError } from '../common/errors';
-import { requireAuth } from '../common/auth';
-import { catalyst, scopeWhereClause } from '../common/datastore';
+import { logger, newRequestId } from './common/logger';
+import { ok, toResponse, ApiError } from './common/errors';
+import { requireAuth } from './common/auth';
+import { catalyst, scopeWhereClause } from './common/datastore';
 
 export default async function search(ctx: any) {
   const requestId = newRequestId();
@@ -49,3 +49,5 @@ export default async function search(ctx: any) {
     return { status, body };
   }
 }
+
+module.exports = search;

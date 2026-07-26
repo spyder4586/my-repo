@@ -6,9 +6,9 @@ exports.default = alerts;
  * Reference: IMPLEMENTATION2.md 4D, API_REFERENCE.md "Alerts".
  * Status: scaffold (4D implements).
  */
-const logger_1 = require("../common/logger");
-const errors_1 = require("../common/errors");
-const auth_1 = require("../common/auth");
+const logger_1 = require("./common/logger");
+const errors_1 = require("./common/errors");
+const auth_1 = require("./common/auth");
 async function alerts(ctx) {
     const requestId = (0, logger_1.newRequestId)();
     try {
@@ -21,4 +21,5 @@ async function alerts(ctx) {
         return { status, body };
     }
 }
+module.exports = alerts;
 //# sourceMappingURL=index.js.map

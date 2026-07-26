@@ -6,17 +6,17 @@ export default function masters(ctx: {
 }): Promise<{
     meta?: Record<string, unknown> | undefined;
     success: true;
-    data: import("../common/masters-store").District[];
+    data: import("./common/masters-store").District[];
 } | {
     meta?: Record<string, unknown> | undefined;
     success: true;
-    data: import("../common/masters-store").Unit[];
+    data: import("./common/masters-store").Unit[];
 } | {
     status: number;
     body: {
         success: false;
         error: {
-            code: import("../common/errors").ErrorCode;
+            code: import("./common/errors").ErrorCode;
             message: string;
             requestId: string | undefined;
         };

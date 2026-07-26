@@ -18,10 +18,10 @@
  * The clustering / baseline / Pearson logic mirrors the dev mock-api so behaviour
  * is identical between `next dev` (mock) and a deployed Catalyst Gateway (this fn).
  */
-import { logger, newRequestId } from '../common/logger';
-import { ok, toResponse, ApiError } from '../common/errors';
-import { requireAuth } from '../common/auth';
-import { catalyst, scopeWhereClause, sanitizeZcqlString } from '../common/datastore';
+import { logger, newRequestId } from './common/logger';
+import { ok, toResponse, ApiError } from './common/errors';
+import { requireAuth } from './common/auth';
+import { catalyst, scopeWhereClause, sanitizeZcqlString } from './common/datastore';
 
 interface Hotspot {
   id: string;
@@ -296,3 +296,5 @@ export default async function analytics(ctx: any) {
     return { status, body };
   }
 }
+
+module.exports = analytics;

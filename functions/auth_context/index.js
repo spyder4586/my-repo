@@ -8,13 +8,14 @@ exports.default = me;
  *
  * STUB until 1B: returns PROFILE_REQUIRED (auth not wired yet).
  */
-const logger_1 = require("../common/logger");
-const errors_1 = require("../common/errors");
-const auth_1 = require("../common/auth");
-const rbac_1 = require("../common/rbac");
-const config_1 = require("../common/config");
-async function me(ctx) {
+const logger_1 = require("./common/logger");
+const errors_1 = require("./common/errors");
+const auth_1 = require("./common/auth");
+const rbac_1 = require("./common/rbac");
+const config_1 = require("./common/config");
+async function me(ctx, basicIO) {
     const requestId = (0, logger_1.newRequestId)();
+    let result;
     try {
         const { profile, scope } = await (0, auth_1.requireAuth)(ctx, requestId);
         const cfg = (0, config_1.config)();
@@ -24,7 +25,7 @@ async function me(ctx) {
             userId: profile.catalystUserId,
             role: profile.role,
         });
-        return (0, errors_1.ok)({
+        result = (0, errors_1.ok)({
             userProfileId: profile.userProfileId,
             role: profile.role,
             districtId: profile.districtId ?? null,
@@ -43,7 +44,13 @@ async function me(ctx) {
     }
     catch (err) {
         const { status, body } = (0, errors_1.toResponse)(err, requestId);
-        return { status, body };
+        result = { status, body };
     }
+    if (basicIO && typeof basicIO.write === 'function') {
+        basicIO.write(JSON.stringify(result));
+        basicIO.close();
+    }
+    return result;
 }
+module.exports = me;
 //# sourceMappingURL=index.js.map

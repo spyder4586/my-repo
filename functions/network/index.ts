@@ -13,10 +13,10 @@
  *      sharing a phone number, vehicle registration, or address → SHARED_ATTRIBUTE
  *      edge. These are computed at query time, not pre-stored.
  */
-import { logger, newRequestId } from '../common/logger';
-import { ok, toResponse } from '../common/errors';
-import { requireAuth } from '../common/auth';
-import { catalyst } from '../common/datastore';
+import { logger, newRequestId } from './common/logger';
+import { ok, toResponse } from './common/errors';
+import { requireAuth } from './common/auth';
+import { catalyst } from './common/datastore';
 
 export default async function network(ctx: any) {
   const requestId = newRequestId();
@@ -257,3 +257,5 @@ function detectCommunities(
   return communities.sort((a, b) => b.memberCount - a.memberCount);
 }
 
+
+module.exports = network;

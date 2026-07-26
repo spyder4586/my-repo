@@ -4,10 +4,10 @@ exports.default = ingest;
 /**
  * Ingest Function — FIR extract import (JSON -> validate -> upsert).
  */
-const logger_1 = require("../common/logger");
-const errors_1 = require("../common/errors");
-const auth_1 = require("../common/auth");
-const datastore_1 = require("../common/datastore");
+const logger_1 = require("./common/logger");
+const errors_1 = require("./common/errors");
+const auth_1 = require("./common/auth");
+const datastore_1 = require("./common/datastore");
 async function ingest(ctx) {
     const requestId = (0, logger_1.newRequestId)();
     try {
@@ -58,4 +58,5 @@ async function ingest(ctx) {
         return { status, body };
     }
 }
+module.exports = ingest;
 //# sourceMappingURL=index.js.map

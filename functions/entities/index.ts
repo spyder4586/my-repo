@@ -1,7 +1,7 @@
-import { logger, newRequestId } from '../common/logger';
-import { ok, toResponse, ApiError } from '../common/errors';
-import { requireAuth } from '../common/auth';
-import { catalyst } from '../common/datastore';
+import { logger, newRequestId } from './common/logger';
+import { ok, toResponse, ApiError } from './common/errors';
+import { requireAuth } from './common/auth';
+import { catalyst } from './common/datastore';
 
 export default async function entities(ctx: any) {
   const requestId = newRequestId();
@@ -48,3 +48,5 @@ export default async function entities(ctx: any) {
     return { status, body };
   }
 }
+
+module.exports = entities;

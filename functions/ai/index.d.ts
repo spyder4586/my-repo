@@ -2,6 +2,32 @@ export default function ai(ctx: any): Promise<{
     meta?: Record<string, unknown> | undefined;
     success: true;
     data: {
+        job: string;
+        status: string;
+        scannedRows: number;
+        triggeredAt: string;
+    };
+} | {
+    meta?: Record<string, unknown> | undefined;
+    success: true;
+    data: {
+        job: string;
+        status: string;
+        message: string;
+    };
+} | {
+    meta?: Record<string, unknown> | undefined;
+    success: true;
+    data: {
+        job: string;
+        status: string;
+        httpStatus: number | null;
+        triggeredAt: string;
+    };
+} | {
+    meta?: Record<string, unknown> | undefined;
+    success: true;
+    data: {
         source: string;
         status: string;
         modelVersion: string;
@@ -39,7 +65,7 @@ export default function ai(ctx: any): Promise<{
     body: {
         success: false;
         error: {
-            code: import("../common/errors").ErrorCode;
+            code: import("./common/errors").ErrorCode;
             message: string;
             requestId: string | undefined;
         };

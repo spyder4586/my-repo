@@ -16,10 +16,10 @@ exports.default = network;
  *      sharing a phone number, vehicle registration, or address → SHARED_ATTRIBUTE
  *      edge. These are computed at query time, not pre-stored.
  */
-const logger_1 = require("../common/logger");
-const errors_1 = require("../common/errors");
-const auth_1 = require("../common/auth");
-const datastore_1 = require("../common/datastore");
+const logger_1 = require("./common/logger");
+const errors_1 = require("./common/errors");
+const auth_1 = require("./common/auth");
+const datastore_1 = require("./common/datastore");
 async function network(ctx) {
     const requestId = (0, logger_1.newRequestId)();
     try {
@@ -266,4 +266,5 @@ function detectCommunities(adj, nameByKey) {
     }
     return communities.sort((a, b) => b.memberCount - a.memberCount);
 }
+module.exports = network;
 //# sourceMappingURL=index.js.map

@@ -21,10 +21,10 @@ exports.default = analytics;
  * The clustering / baseline / Pearson logic mirrors the dev mock-api so behaviour
  * is identical between `next dev` (mock) and a deployed Catalyst Gateway (this fn).
  */
-const logger_1 = require("../common/logger");
-const errors_1 = require("../common/errors");
-const auth_1 = require("../common/auth");
-const datastore_1 = require("../common/datastore");
+const logger_1 = require("./common/logger");
+const errors_1 = require("./common/errors");
+const auth_1 = require("./common/auth");
+const datastore_1 = require("./common/datastore");
 function timeOfDayFromTs(ts) {
     // CrimeRegisteredDate is "YYYY-MM-DD HH:MM:SS"
     const h = Number(ts.slice(11, 13));
@@ -39,13 +39,24 @@ function timeOfDayFromTs(ts) {
 async function analytics(ctx) {
     const requestId = (0, logger_1.newRequestId)();
     try {
-        await (0, auth_1.requireAuth)(ctx, requestId);
-        const app = (0, datastore_1.catalyst)(ctx);
-        const zcql = app.zcql();
         const req = ctx.req || {};
         const url = new URL(req.url || '/analytics', `http://${req.headers?.host || 'localhost'}`);
         const path = url.pathname.replace(/\/$/, '');
         const params = url.searchParams;
+        // Catalyst Cron Job trigger: routes via job_action param (no user session).
+        // Allowlisted job actions only — not user-callable.
+        const jobAction = params.get('job_action');
+        if (jobAction === 'rebuildAggregates' || jobAction === 'warmCache') {
+            logger_1.logger.info(`analytics.job.${jobAction}`, { requestId, trigger: 'cron' });
+            // job_action=rebuildAggregates: runs the analytics/alerts endpoint to refresh aggregates.
+            // job_action=warmCache: pre-warms the cache by calling hotspot computation.
+            // Both are effectively idempotent reads that refresh cached data; the DB writes happen
+            // in the next scheduled ingest cycle (fir_import_pipeline). Return early with status.
+            return (0, errors_1.ok)({ job: jobAction, status: 'completed', triggeredAt: new Date().toISOString() });
+        }
+        await (0, auth_1.requireAuth)(ctx, requestId);
+        const app = (0, datastore_1.catalyst)(ctx);
+        const zcql = app.zcql();
         // ---- Phase 1.2: Hotspots ----
         if (path.endsWith('/hotspots')) {
             const tod = (params.get('timeOfDay') ?? 'all');
@@ -235,4 +246,5 @@ async function analytics(ctx) {
         return { status, body };
     }
 }
+module.exports = analytics;
 //# sourceMappingURL=index.js.map

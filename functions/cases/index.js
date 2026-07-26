@@ -9,11 +9,11 @@ exports.default = cases;
  * Reference: IMPLEMENTATION2.md 1D, API_REFERENCE.md "Cases".
  * Status: scaffold (1D implements).
  */
-const logger_1 = require("../common/logger");
-const errors_1 = require("../common/errors");
-const auth_1 = require("../common/auth");
-const datastore_1 = require("../common/datastore");
-const CaseRepository_1 = require("../common/repositories/CaseRepository");
+const logger_1 = require("./common/logger");
+const errors_1 = require("./common/errors");
+const auth_1 = require("./common/auth");
+const datastore_1 = require("./common/datastore");
+const CaseRepository_1 = require("./common/repositories/CaseRepository");
 async function cases(ctx) {
     const requestId = (0, logger_1.newRequestId)();
     try {
@@ -69,4 +69,5 @@ async function cases(ctx) {
 // Helper reserved for 1D to throw consistent NOT_FOUND on out-of-scope (ADR-012).
 const notFound = (requestId) => new errors_1.ApiError('NOT_FOUND', 'Case not found.', requestId);
 exports.notFound = notFound;
+module.exports = cases;
 //# sourceMappingURL=index.js.map

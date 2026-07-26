@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = search;
-const logger_1 = require("../common/logger");
-const errors_1 = require("../common/errors");
-const auth_1 = require("../common/auth");
-const datastore_1 = require("../common/datastore");
+const logger_1 = require("./common/logger");
+const errors_1 = require("./common/errors");
+const auth_1 = require("./common/auth");
+const datastore_1 = require("./common/datastore");
 async function search(ctx) {
     const requestId = (0, logger_1.newRequestId)();
     try {
@@ -42,4 +42,5 @@ async function search(ctx) {
         return { status, body };
     }
 }
+module.exports = search;
 //# sourceMappingURL=index.js.map

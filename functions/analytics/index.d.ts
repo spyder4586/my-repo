@@ -30,6 +30,14 @@ interface TrendPoint {
 export default function analytics(ctx: any): Promise<{
     meta?: Record<string, unknown> | undefined;
     success: true;
+    data: {
+        job: string;
+        status: string;
+        triggeredAt: string;
+    };
+} | {
+    meta?: Record<string, unknown> | undefined;
+    success: true;
     data: Hotspot[];
 } | {
     meta?: Record<string, unknown> | undefined;
@@ -56,7 +64,7 @@ export default function analytics(ctx: any): Promise<{
     body: {
         success: false;
         error: {
-            code: import("../common/errors").ErrorCode;
+            code: import("./common/errors").ErrorCode;
             message: string;
             requestId: string | undefined;
         };

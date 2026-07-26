@@ -3,9 +3,9 @@
  * Reference: IMPLEMENTATION2.md 4D, API_REFERENCE.md "Alerts".
  * Status: scaffold (4D implements).
  */
-import { logger, newRequestId } from '../common/logger';
-import { ok, toResponse } from '../common/errors';
-import { requireAuth } from '../common/auth';
+import { logger, newRequestId } from './common/logger';
+import { ok, toResponse } from './common/errors';
+import { requireAuth } from './common/auth';
 
 export default async function alerts(ctx: unknown) {
   const requestId = newRequestId();
@@ -18,3 +18,5 @@ export default async function alerts(ctx: unknown) {
     return { status, body };
   }
 }
+
+module.exports = alerts;

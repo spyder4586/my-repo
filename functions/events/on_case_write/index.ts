@@ -4,7 +4,7 @@
  * Marks affected unit-day aggregates dirty for incremental rebuild.
  * Reference: CATALYST_INTEGRATION.md #8, BACKEND_ARCHITECTURE.md #6.
  */
-import { logger, newRequestId } from '../../common/logger';
+import { logger, newRequestId } from '.././common/logger';
 
 export default async function onCaseWrite(_ctx: unknown) {
   const requestId = newRequestId();

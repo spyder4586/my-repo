@@ -13,12 +13,12 @@
  * PII inclusion derived server-side from canSeePii (PII_ROLES), never a client toggle.
  * (5B DoD: SCRB generates District Weekly; SHO cannot generate another district's report.)
  */
-import { logger, newRequestId } from '../common/logger';
-import { ok, toResponse, ApiError } from '../common/errors';
-import { requireAuth } from '../common/auth';
-import { canExport, canSeePii } from '../common/rbac';
-import { config } from '../common/config';
-import { parse } from '../common/validation';
+import { logger, newRequestId } from './common/logger';
+import { ok, toResponse, ApiError } from './common/errors';
+import { requireAuth } from './common/auth';
+import { canExport, canSeePii } from './common/rbac';
+import { config } from './common/config';
+import { parse } from './common/validation';
 import { z } from 'zod';
 
 /** Templates allowed by the API contract (API_REFERENCE.md "Reports"). */
@@ -337,7 +337,7 @@ function listJobs(
  * In production: triggers the `report_generate` Circuit (CATALYST_INTEGRATION.md #9):
  *   load_data -> SmartBrowz render PDF -> Stratus reports/ -> update ReportJob -> Mail.
  */
-import { catalyst } from '../common/datastore';
+import { catalyst } from './common/datastore';
 
 async function runGeneration(jobId: string, ctx: any): Promise<void> {
   const job = jobs.get(jobId);
@@ -398,3 +398,5 @@ async function runGeneration(jobId: string, ctx: any): Promise<void> {
     logger.error('reports.generate.failed', { jobId, err: String(err) });
   }
 }
+
+module.exports = reports;

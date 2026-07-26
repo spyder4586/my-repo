@@ -5,14 +5,15 @@
  *
  * STUB until 1B: returns PROFILE_REQUIRED (auth not wired yet).
  */
-import { logger, newRequestId } from '../common/logger';
-import { toResponse, ok } from '../common/errors';
-import { requireAuth } from '../common/auth';
-import { canSeePii, canExport, isAdmin, canReadAudit, isStateScope, defaultHome } from '../common/rbac';
-import { config } from '../common/config';
+import { logger, newRequestId } from './common/logger';
+import { toResponse, ok } from './common/errors';
+import { requireAuth } from './common/auth';
+import { canSeePii, canExport, isAdmin, canReadAudit, isStateScope, defaultHome } from './common/rbac';
+import { config } from './common/config';
 
-export default async function me(ctx: unknown) {
+export default async function me(ctx: unknown, basicIO?: any) {
   const requestId = newRequestId();
+  let result: any;
   try {
     const { profile, scope } = await requireAuth(ctx, requestId);
     const cfg = config();
@@ -22,7 +23,7 @@ export default async function me(ctx: unknown) {
       userId: profile.catalystUserId,
       role: profile.role,
     });
-    return ok({
+    result = ok({
       userProfileId: profile.userProfileId,
       role: profile.role,
       districtId: profile.districtId ?? null,
@@ -40,6 +41,13 @@ export default async function me(ctx: unknown) {
     });
   } catch (err) {
     const { status, body } = toResponse(err, requestId);
-    return { status, body };
+    result = { status, body };
   }
+  if (basicIO && typeof basicIO.write === 'function') {
+    basicIO.write(JSON.stringify(result));
+    basicIO.close();
+  }
+  return result;
 }
+
+module.exports = me;

@@ -59,7 +59,7 @@ export default function reports(ctx: {
     body: {
         success: false;
         error: {
-            code: import("../common/errors").ErrorCode;
+            code: import("./common/errors").ErrorCode;
             message: string;
             requestId: string | undefined;
         };

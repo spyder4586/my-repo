@@ -7,7 +7,7 @@ exports.default = onCaseWrite;
  * Marks affected unit-day aggregates dirty for incremental rebuild.
  * Reference: CATALYST_INTEGRATION.md #8, BACKEND_ARCHITECTURE.md #6.
  */
-const logger_1 = require("../../common/logger");
+const logger_1 = require(".././common/logger");
 async function onCaseWrite(_ctx) {
     const requestId = (0, logger_1.newRequestId)();
     logger_1.logger.info('event.case_write', { requestId, event: 'on_case_write' });

@@ -14,10 +14,10 @@
  * note. The schema is designed so a stronger identifier can replace PersonKey
  * later without code changes.
  */
-import { logger, newRequestId } from '../common/logger';
-import { ok, toResponse, ApiError } from '../common/errors';
-import { requireAuth } from '../common/auth';
-import { catalyst, scopeWhereClause, sanitizeZcqlString } from '../common/datastore';
+import { logger, newRequestId } from './common/logger';
+import { ok, toResponse, ApiError } from './common/errors';
+import { requireAuth } from './common/auth';
+import { catalyst, scopeWhereClause, sanitizeZcqlString } from './common/datastore';
 
 interface OffenderProfile {
   personKey: string;
@@ -134,3 +134,5 @@ async function buildProfile(
     caseHistory: caseHistory.sort((a, b) => b.registeredDate.localeCompare(a.registeredDate)),
   };
 }
+
+module.exports = offenders;

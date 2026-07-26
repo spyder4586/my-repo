@@ -7,7 +7,7 @@ exports.default = onImportComplete;
  * Kicks off the fir_import Circuit (validate -> load -> graph refresh -> notify).
  * Reference: CATALYST_INTEGRATION.md #8/#9, IMPLEMENTATION2.md 1E.
  */
-const logger_1 = require("../../common/logger");
+const logger_1 = require(".././common/logger");
 async function onImportComplete(_ctx) {
     const requestId = (0, logger_1.newRequestId)();
     logger_1.logger.info('event.import_complete', { requestId, event: 'on_import_complete' });

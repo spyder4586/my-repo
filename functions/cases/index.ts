@@ -5,11 +5,11 @@
  * Reference: IMPLEMENTATION2.md 1D, API_REFERENCE.md "Cases".
  * Status: scaffold (1D implements).
  */
-import { logger, newRequestId } from '../common/logger';
-import { ok, toResponse, ApiError } from '../common/errors';
-import { requireAuth } from '../common/auth';
-import { catalyst } from '../common/datastore';
-import { CaseRepository } from '../common/repositories/CaseRepository';
+import { logger, newRequestId } from './common/logger';
+import { ok, toResponse, ApiError } from './common/errors';
+import { requireAuth } from './common/auth';
+import { catalyst } from './common/datastore';
+import { CaseRepository } from './common/repositories/CaseRepository';
 
 export default async function cases(ctx: any) {
   const requestId = newRequestId();
@@ -75,3 +75,5 @@ export default async function cases(ctx: any) {
 // Helper reserved for 1D to throw consistent NOT_FOUND on out-of-scope (ADR-012).
 export const notFound = (requestId?: string) =>
   new ApiError('NOT_FOUND', 'Case not found.', requestId);
+
+module.exports = cases;

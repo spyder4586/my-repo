@@ -31,7 +31,7 @@ export default function offenders(ctx: any): Promise<{
     body: {
         success: false;
         error: {
-            code: import("../common/errors").ErrorCode;
+            code: import("./common/errors").ErrorCode;
             message: string;
             requestId: string | undefined;
         };

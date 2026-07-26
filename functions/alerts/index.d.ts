@@ -9,7 +9,7 @@ export default function alerts(ctx: unknown): Promise<{
     body: {
         success: false;
         error: {
-            code: import("../common/errors").ErrorCode;
+            code: import("./common/errors").ErrorCode;
             message: string;
             requestId: string | undefined;
         };

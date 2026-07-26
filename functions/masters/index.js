@@ -12,10 +12,10 @@ exports.default = masters;
  * Scope: non-SCRB roles receive own district/unit only (API_REFERENCE).
  * Full masters set (crime-heads, acts, sections...) added in 1C.
  */
-const logger_1 = require("../common/logger");
-const errors_1 = require("../common/errors");
-const auth_1 = require("../common/auth");
-const masters_store_1 = require("../common/masters-store");
+const logger_1 = require("./common/logger");
+const errors_1 = require("./common/errors");
+const auth_1 = require("./common/auth");
+const masters_store_1 = require("./common/masters-store");
 async function masters(ctx) {
     const requestId = (0, logger_1.newRequestId)();
     try {
@@ -76,4 +76,5 @@ async function masters(ctx) {
         return { status, body };
     }
 }
+module.exports = masters;
 //# sourceMappingURL=index.js.map

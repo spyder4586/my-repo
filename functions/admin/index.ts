@@ -3,9 +3,9 @@
  * Reference: IMPLEMENTATION2.md 5C, API_REFERENCE.md "Admin".
  * Status: scaffold (5C implements; admin APIs partial from 1B).
  */
-import { logger, newRequestId } from '../common/logger';
-import { ok, toResponse } from '../common/errors';
-import { requireRoles } from '../common/auth';
+import { logger, newRequestId } from './common/logger';
+import { ok, toResponse } from './common/errors';
+import { requireRoles } from './common/auth';
 
 export default async function admin(ctx: unknown) {
   const requestId = newRequestId();
@@ -18,3 +18,5 @@ export default async function admin(ctx: unknown) {
     return { status, body };
   }
 }
+
+module.exports = admin;

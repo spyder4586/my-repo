@@ -17,10 +17,10 @@ exports.default = offenders;
  * note. The schema is designed so a stronger identifier can replace PersonKey
  * later without code changes.
  */
-const logger_1 = require("../common/logger");
-const errors_1 = require("../common/errors");
-const auth_1 = require("../common/auth");
-const datastore_1 = require("../common/datastore");
+const logger_1 = require("./common/logger");
+const errors_1 = require("./common/errors");
+const auth_1 = require("./common/auth");
+const datastore_1 = require("./common/datastore");
 async function offenders(ctx) {
     const requestId = (0, logger_1.newRequestId)();
     try {
@@ -106,4 +106,5 @@ async function buildProfile(zcql, scopeClause, personKey, personName, priorArres
         caseHistory: caseHistory.sort((a, b) => b.registeredDate.localeCompare(a.registeredDate)),
     };
 }
+module.exports = offenders;
 //# sourceMappingURL=index.js.map

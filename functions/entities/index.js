@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = entities;
-const logger_1 = require("../common/logger");
-const errors_1 = require("../common/errors");
-const auth_1 = require("../common/auth");
-const datastore_1 = require("../common/datastore");
+const logger_1 = require("./common/logger");
+const errors_1 = require("./common/errors");
+const auth_1 = require("./common/auth");
+const datastore_1 = require("./common/datastore");
 async function entities(ctx) {
     const requestId = (0, logger_1.newRequestId)();
     try {
@@ -47,4 +47,5 @@ async function entities(ctx) {
         return { status, body };
     }
 }
+module.exports = entities;
 //# sourceMappingURL=index.js.map

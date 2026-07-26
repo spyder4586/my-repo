@@ -19,11 +19,11 @@
  *    QuickML LLM Serving + Knowledge Base.
  *    Doc: https://docs.catalyst.zoho.com/en/quickml/help/generative-ai/llm-serving/
  */
-import { logger, newRequestId } from '../common/logger';
-import { ok, toResponse, ApiError } from '../common/errors';
-import { requireRoles } from '../common/auth';
-import type { Role } from '../common/rbac';
-import { catalyst, scopeWhereClause, sanitizeZcqlString } from '../common/datastore';
+import { logger, newRequestId } from './common/logger';
+import { ok, toResponse, ApiError } from './common/errors';
+import { requireRoles } from './common/auth';
+import type { Role } from './common/rbac';
+import { catalyst, scopeWhereClause, sanitizeZcqlString } from './common/datastore';
 
 const AI_ROLES: Role[] = ['SUPER_ADMIN', 'SCRB_ANALYST', 'DISTRICT_COMMAND'];
 
@@ -218,3 +218,5 @@ export default async function ai(ctx: any) {
     return { status, body };
   }
 }
+
+module.exports = ai;

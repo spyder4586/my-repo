@@ -9,10 +9,10 @@
  * Scope: non-SCRB roles receive own district/unit only (API_REFERENCE).
  * Full masters set (crime-heads, acts, sections...) added in 1C.
  */
-import { logger, newRequestId } from '../common/logger';
-import { ok, toResponse, ApiError } from '../common/errors';
-import { requireAuth } from '../common/auth';
-import { getDistricts, getUnits, getUnitsByDistrict } from '../common/masters-store';
+import { logger, newRequestId } from './common/logger';
+import { ok, toResponse, ApiError } from './common/errors';
+import { requireAuth } from './common/auth';
+import { getDistricts, getUnits, getUnitsByDistrict } from './common/masters-store';
 
 export default async function masters(ctx: {
   method?: string;
@@ -87,3 +87,5 @@ export default async function masters(ctx: {
     return { status, body };
   }
 }
+
+module.exports = masters;
